@@ -1,0 +1,35 @@
+[
+  {
+    "model": "levelupapi.event",
+    "pk": 1,
+    "fields": {
+      "organizer": 1,
+      "game": 1,
+      "description": "We are going to play Who Stole All the Beans?",
+      "date": "2023-05-05",
+      "time": "17:00"
+    }
+  },
+  {
+    "model": "levelupapi.event",
+    "pk": 2,
+    "fields": {
+      "organizer": 1,
+      "game": 2,
+      "description": "We are going to play the Mole Hunters Game",
+      "date": "2023-05-06",
+      "time": "18:00"
+    }
+  },
+  {
+    "model": "levelupapi.event",
+    "pk": 3,
+    "fields": {
+      "organizer": 1,
+      "game": 2,
+      "description": "We are going to play Codewars",
+      "date": "2023-05-05",
+      "time": "17:00"
+    }
+  }
+]
