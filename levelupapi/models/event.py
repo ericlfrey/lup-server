@@ -11,7 +11,8 @@ class Event(models.Model):
     description = models.CharField(max_length=100)
     date = models.DateField(auto_now=False, auto_now_add=False)
     time = models.TimeField()
-    # attendees = models.ManyToManyField(Gamer, related_name="events")
+    # attendee = models.ForeignKey(
+    #     "EventGamer", on_delete=models.CASCADE, related_name="events")
 
     # @property
     # def joined(self):
