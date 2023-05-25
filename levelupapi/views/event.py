@@ -79,14 +79,26 @@ class EventView(ViewSet):
     def signup(self, request, pk):
         """Post request for a user to sign up for an event"""
 
-        gamer = Gamer.objects.get(user=request.data["userId"])
+        gamer = Gamer.objects.get(uid=request.data["userId"])
         event = Event.objects.get(pk=pk)
-        attendee = EventGamer.objects.create(
+        EventGamer.objects.create(
             gamer=gamer,
             event=event
         )
-        # event.attendees.add(attendee)
         return Response({'message': 'Gamer added'}, status=status.HTTP_201_CREATED)
+
+    @action(methods=['delete'], detail=True)
+    def leave(self, request, pk):
+        """Delete request for a user to leave an event"""
+
+        gamer = Gamer.objects.get(uid=request.data["userId"])
+        event = Event.objects.get(pk=pk)
+        attendee = EventGamer.objects.get(
+            gamer=gamer,
+            event=event
+        )
+        attendee.delete()
+        return Response({'message': 'Gamer removed'}, status=status.HTTP_204_NO_CONTENT)
 
 
 class EventSerializer(serializers.ModelSerializer):
