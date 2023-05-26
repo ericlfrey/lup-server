@@ -11,14 +11,12 @@ class Event(models.Model):
     description = models.CharField(max_length=100)
     date = models.DateField(auto_now=False, auto_now_add=False)
     time = models.TimeField()
-    # attendee = models.ForeignKey(
-    #     "EventGamer", on_delete=models.CASCADE, related_name="events")
 
-    # @property
-    # def joined(self):
-    #     """Custom Property"""
-    #     return self.__joined
+    @property
+    def joined(self):
+        """Custom Property"""
+        return self.__joined
 
-    # @joined.setter
-    # def joined(self, value):
-    #     self.__joined = value
+    @joined.setter
+    def joined(self, value):
+        self.__joined = value
