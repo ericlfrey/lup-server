@@ -18,7 +18,8 @@ class EventView(ViewSet):
             Response -- JSON serialized event
         """
         try:
-            event = Event.objects.get(pk=pk)
+            event = Event.objects.annotate(
+                attendees_count=Count('attendees')).get(pk=pk)
             serializer = EventSerializer(event)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Event.DoesNotExist as ex:
