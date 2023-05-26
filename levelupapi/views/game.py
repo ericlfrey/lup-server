@@ -1,6 +1,6 @@
 """View module for handling requests about game types"""
 from django.http import HttpResponseServerError
-from django.db.models import Count
+from django.db.models import Count, Q
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
@@ -29,7 +29,10 @@ class GameView(ViewSet):
         Returns:
             Response -- JSON serialized list of games
         """
-        games = Game.objects.annotate(event_count=Count('events'))
+        uid = request.META['HTTP_AUTHORIZATION']
+        gamer = Gamer.objects.get(uid=uid)
+        games = Game.objects.annotate(event_count=Count(
+            'events'), user_event_count=Count('events', filter=Q(events__organizer=gamer)))
         game_type = request.query_params.get('type', None)
         if game_type is not None:
             games = games.filter(game_type_id=game_type)
